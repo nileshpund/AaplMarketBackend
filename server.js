@@ -4,6 +4,7 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const server = express()
 server.use(bodyParser.json());
+const https = require('https');
 
 //ESTABLISH DB CONNECTION
 const db = mysql.createConnection({
@@ -19,6 +20,13 @@ db.connect(function(error){
     }else{
         console.log('Successfully connected DB');
     }
+})
+
+//NEW CODE
+server = https.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('contentType', 'text/plain');
+    res.end('Beast Mode On')
 })
 
 // server.listen(8080, function(error){
