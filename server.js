@@ -6,6 +6,7 @@ const server = express()
 server.use(bodyParser.json());
 const port = process.env.PORT || 8080;
 
+
 //ESTABLISH DB CONNECTION
 const db = mysql.createConnection({
     host:"localhost",
@@ -20,6 +21,14 @@ db.connect(function(error){
     }else{
         console.log('Successfully connected DB');
     }
+})
+
+server.get("/", (req, res) =>{
+    res.send("I m live")
+})
+
+server.get("/service", (req, res) =>{
+    res.send("I m service")
 })
 
 // server.listen(port, function(error){
