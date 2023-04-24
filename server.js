@@ -4,7 +4,7 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const server = express()
 server.use(bodyParser.json());
-const http = require('http');
+const port = process.env.PORT || 8080;
 
 //ESTABLISH DB CONNECTION
 const db = mysql.createConnection({
@@ -22,23 +22,16 @@ db.connect(function(error){
     }
 })
 
-//NEW CODE
-http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('contentType', 'text/plain');
-    res.end('Beast Mode On')
-})
-
-// server.listen(3000, function(error){
+// server.listen(port, function(error){
 //     if(error) console.log("Error... !!!");
 //     else console.log("Started... !!!")
 // })
 
-server.listen(3000, function check(error){
+server.listen(port, function check(error){
     if(error){
         console.log("Error... !!!")
     }else{
-        console.log("Started... !!! 3000")
+        console.log("Started... !!! port")
     }
 });
 
