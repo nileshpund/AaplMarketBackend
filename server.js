@@ -1,5 +1,5 @@
 const express = require('express')
-const bodyparser = require('body-parser')
+// const bodyparser = require('body-parser')
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const server = express()
@@ -9,10 +9,10 @@ const port = process.env.PORT || 8080;
 
 //ESTABLISH DB CONNECTION
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"AaplMarket"
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password:process.env.DB_PASSWORD || '',
+    database:process.env.DB_NAME || 'AaplMarket'
 })
 
 db.connect(function(error){
