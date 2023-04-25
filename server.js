@@ -9,13 +9,14 @@ const port = process.env.PORT || 8080;
 
 //ESTABLISH DB CONNECTION
 const db = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
+    host: process.env.DB_HOST || 'localhost' || 'https://aaplmarketbackend.onrender.com',
+    user: process.env.DB_USER || 'root' || 'AaplMarket',
     password:process.env.DB_PASSWORD || '',
     database:process.env.DB_NAME || 'AaplMarket'
 })
 
 db.connect(function(error){
+    console.log("db host ", process.env.DB_HOST)
     if(error){
         console.log('Error connecting DB ');
     }else{
