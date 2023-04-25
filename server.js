@@ -8,12 +8,19 @@ const port = process.env.PORT || 8080;
 
 
 //ESTABLISH DB CONNECTION
+// const db = mysql.createConnection({
+//     host: process.env.DB_HOST || 'localhost' || 'https://aaplmarketbackend.onrender.com',
+//     user: process.env.DB_USER || 'root' || 'AaplMarket',
+//     password:process.env.DB_PASSWORD || '',
+//     database:process.env.DB_NAME || 'AaplMarket'
+// })   
+
 const db = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost' || 'https://aaplmarketbackend.onrender.com',
-    user: process.env.DB_USER || 'root' || 'AaplMarket',
-    password:process.env.DB_PASSWORD || '',
-    database:process.env.DB_NAME || 'AaplMarket'
-})
+    host:'dpg-ch3qptss3fvkjtq3nhhg-a',
+    user: 'aaplmarket_user',
+    password:'iEgdZKfeCESW25oIPu8UQkaR6wwdLxQk',
+    database:'aaplmarket'
+})  
 
 db.connect(function(error){
     console.log("db host ", process.env.DB_HOST)
