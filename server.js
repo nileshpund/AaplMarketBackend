@@ -4,57 +4,54 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const server = express()
 server.use(bodyParser.json());
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080 || 19847;
 
 
-const { Client } = require('pg');
-const client = new Client('postgres://aaplmarket_d6ik_user:SdrErISXUtYL4wK6pKIYjLhrxVAm0lq8@dpg-ch4c1764dad97s1v7tng-a/aaplmarket_d6ik')
+//*****************POSTGRES DB CONNECTION***************************/
+// const { Client } = require('pg');
+// const client = new Client('postgres://aaplmarket_d6ik_user:SdrErISXUtYL4wK6pKIYjLhrxVAm0lq8@dpg-ch4c1764dad97s1v7tng-a/aaplmarket_d6ik')
 
-client.connect(function(err) {  
-    if (err){
-        console.log('Error connecting DB ')
-    }else{
-        console.log("Successfully connected DB");
+// client.connect(function(err) {  
+//     if (err){
+//         console.log('Error connecting DB ')
+//     }else{
+//         console.log("Successfully connected DB");
+//     }
+//   });
+
+//*****************MYSQL DB CONNECTION***************************/
+const db = mysql.createConnection({
+    host: 'mysql-123408-0.cloudclusters.net',
+    user: 'Nilesh',
+    password:'Nilesh@321',
+    database:'aaplmarket'
+})
+
+db.connect(function (error) {
+    console.log("db host ", process.env.DB_HOST)
+    if (error) {
+        console.log('Error connecting DB ');
+    } else {
+        console.log('Successfully connected DB');
     }
-  });
+})
 
-//ESTABLISH DB CONNECTION
-// const db = mysql.createConnection({
-//     host: process.env.DB_HOST || 'localhost',
-//     user: process.env.DB_USER || 'root',
-//     password:process.env.DB_PASSWORD || '',
-//     database:process.env.DB_NAME || 'AaplMarket'
-// })
+server.get("/", (req, res) => {
+    res.send("I m live")
+})
 
-// db.connect(function (error) {
-//     console.log("db host ", process.env.DB_HOST)
-//     if (error) {
-//         console.log('Error connecting DB ');
-//     } else {
-//         console.log('Successfully connected DB');
-//     }
-// })
+server.get("/service", (req, res) => {
+    res.send("I m service")
+})
 
-// server.get("/", (req, res) => {
-//     res.send("I m live")
-// })
 
-// server.get("/service", (req, res) => {
-//     res.send("I m service")
-// })
-
-// // server.listen(port, function(error){
-// //     if(error) console.log("Error... !!!");
-// //     else console.log("Started... !!!")
-// // })
-
-// server.listen(port, function check(error) {
-//     if (error) {
-//         console.log("Error... !!!")
-//     } else {
-//         console.log("Started... !!! port")
-//     }
-// });
+server.listen(port, function check(error) {
+    if (error) {
+        console.log("Error... !!!")
+    } else {
+        console.log("Started... !!! port")
+    }
+});
 
 
 // //Insert
@@ -74,17 +71,17 @@ client.connect(function(err) {
 //     });
 // });
 
-// //View
-// server.get("/api/demo", (req, res) => {
-//     var sql = "SELECT * FROM demo";
-//     db.query(sql, function (error, result) {
-//         if (error) {
-//             console.log("Error Connectig to DB")
-//         } else {
-//             res.send({ status: true, data: result })
-//         }
-//     });
-// });
+//View
+server.get("/api/view", (req, res) => {
+    var sql = "SELECT * FROM demo";
+    db.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connectig to DB")
+        } else {
+            res.send({ status: true, data: result })
+        }
+    });
+});
 
 
 // //View by Id
