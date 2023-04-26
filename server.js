@@ -4,26 +4,27 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const server = express()
 server.use(bodyParser.json());
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5432 || 8080;
 
 
 //ESTABLISH DB CONNECTION
 // const db = mysql.createConnection({
-//     host: process.env.DB_HOST || 'localhost' || 'https://aaplmarketbackend.onrender.com',
-//     user: process.env.DB_USER || 'root' || 'AaplMarket',
+//     host: process.env.DB_HOST || 'localhost',
+//     user: process.env.DB_USER || 'root',
 //     password:process.env.DB_PASSWORD || '',
-//     database:process.env.DB_NAME || 'AaplMarket'
-// })   
+//     database:process.env.DB_NAME || 'AaplMarket',
+// })
 
 const db = mysql.createConnection({
-    host:'dpg-ch3qptss3fvkjtq3nhhg-a',
+    host: 'dpg-ch3qptss3fvkjtq3nhhg-a',
     user: 'aaplmarket_user',
     password:'iEgdZKfeCESW25oIPu8UQkaR6wwdLxQk',
-    database:'aaplmarket'
-})  
+    database:'aaplmarket',
+    port:5432
+})
 
 db.connect(function(error){
-    console.log("db host ", process.env.DB_HOST)
+    // console.log("db host ", process.env)
     if(error){
         console.log('Error connecting DB ');
     }else{
