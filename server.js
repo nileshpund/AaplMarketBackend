@@ -24,7 +24,8 @@ const db = mysql.createConnection({
     host: 'mysql-123408-0.cloudclusters.net',
     user: 'Nilesh',
     password:'Nilesh@321',
-    database:'aaplmarket'
+    database:'aaplmarket',
+    port:'19847'
 })
 
 db.connect(function (error) {
